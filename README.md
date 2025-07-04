@@ -145,3 +145,12 @@ The `MultiVulnerableVault` contract was reviewed for security vulnerabilities, g
 ## 🔚 Conclusion
 
 The contract is highly centralized and exposes critical vulnerabilities that could lead to total fund loss. We **do not recommend deploying** this contract until all high and critical vulnerabilities are resolved. Use modern Solidity patterns and trusted libraries (e.g., OpenZeppelin) to enhance the security, maintainability, and upgradeability of the contract.
+
+
+````
+ Note on Testing
+
+This audit focuses on identifying and explaining security vulnerabilities in a deliberately insecure smart contract. Given the absence of defined invariants, functional specifications, or production-ready logic, no test cases were included.
+
+The objective of this review is to evaluate the code strictly from a security perspective through static analysis and manual inspection. As such, test coverage is not applicable or required for this technical exercise.
+```
