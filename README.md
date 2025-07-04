@@ -1,10 +1,10 @@
  # 🔍 Smart Contract Security Audit Report
 
-**Contract Name:** `MultiVulnerableVault`
-**Auditor:** Therock Ani
-**Date:** July 4, 2025
-**Solidity Version:** `^0.8.17`
-**Target Environment:** EVM-Compatible (Note on Shanghai PUSH0 support)
+- **Contract Name:** `MultiVulnerableVault`
+- **Auditor:** Therock Ani
+- **Date:** July 4, 2025
+- **Solidity Version:** `^0.8.17`
+- **Target Environment:** EVM-Compatible (Note on Shanghai PUSH0 support)
 
 ---
 
