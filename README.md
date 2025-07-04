@@ -68,7 +68,7 @@ The `MultiVulnerableVault` contract was reviewed for security vulnerabilities, g
 ### 2. **Owner Not Immutable**
 
 * **Impact:** Gas inefficiency and potential reassignment vector if logic is extended.
-* **Recommendation:** Declare `owner` as `immutable`.
+* **Recommendation:** Declare `owner` as `immutable` or use OpenZeppelin’s battle-tested `Ownable`.
 
 ### 3. **EVM Assembly in Signature Splitting**
 
