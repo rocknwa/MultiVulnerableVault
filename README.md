@@ -72,7 +72,9 @@ A comprehensive security audit report ([AUDIT.md](Audit-Report/Report.pdf)) iden
 
 Review the [audit report](Audit-Report/Report.pdf) for a complete list of vulnerabilities and recommended mitigations.
 
+---
 ## Check [Safe Vault](https://github.com/rocknwa/SafeVault) For production grade contract
+---
 
 ## Contributing
 
