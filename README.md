@@ -61,7 +61,7 @@ See [`test/MultiVulnerableVaultTest.sol`](test/MultiVulnerableVaultTest.sol) for
 > **Critical Warning:**  
 > This contract is intentionally vulnerable and should **not** be deployed on mainnet or used with real funds.
 
-A comprehensive security audit report ([AUDIT.md](security-audit.md)) identifies the following high-severity issues:
+A comprehensive security audit report ([AUDIT.md](Audit-Report/Report.pdf)) identifies the following high-severity issues:
 
 - **Owner can drain funds** via `adminWithdraw`
 - **Signature replay attacks** in `recoverFunds` allow unauthorized fund drainage
@@ -70,7 +70,9 @@ A comprehensive security audit report ([AUDIT.md](security-audit.md)) identifies
 - **Non-reverting transfer failures** in `withdraw` cause fund loss
 - **Outdated compiler** (`0.8.17`) introduces deployment and security risks
 
-Review the [audit report](docs/AUDIT.md) for a complete list of vulnerabilities and recommended mitigations.
+Review the [audit report](Audit-Report/Report.pdf) for a complete list of vulnerabilities and recommended mitigations.
+
+Check [Safe Vault](https://github.com/rocknwa/SafeVault) For production grade contract
 
 ## Contributing
 
