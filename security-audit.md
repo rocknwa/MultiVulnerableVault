@@ -215,7 +215,7 @@ The `calculateReward` function performs division before multiplication (`amount 
 Users may receive incorrect or zero rewards due to truncation, reducing trust. The unused function increases code complexity and gas costs.
 
 **Proof of Concept:**  
-- For `amount = 999` and `periods = 10`, `calculateReward` returns `0` (`999 / 1000 = 0`, then `0 * 10 = 0`), losing all precision.
+- For `amount = 999` and `periods = 10`, `calculateReward` returns `0` (`999 / 1000 = 0`, then `0 * 10 = 0`), losing all precision. Check `testCalculateRewardPrecisionLoss()` for more details.
 
 **Recommended Mitigation:**  
 - Remove `calculateReward` if no reward mechanism is implemented.

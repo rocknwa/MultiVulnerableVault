@@ -243,4 +243,43 @@ contract MultiVulnerableVaultTest is Test {
         assertEq(address(receiveContract).balance, 0, "ReceiveContract should have 0 ETH");
         assertEq(address(vault).balance, 2 ether, "Vault balance should be 2 ETH");
     }
+
+    /// @notice Verifies that the calculateReward function suffers from precision loss due to division before
+    /// multiplication.
+    /// @dev Tests the calculateReward function with small and large amounts to demonstrate truncation errors.
+    ///      Compares results with an expected calculation (multiplication before division) to highlight the issue.
+    /// @custom:security-risk Integer division before multiplication truncates results, leading to incorrect or zero
+    ///                       rewards (audit note: "Solidity's integer division truncates... perform multiplication
+    /// before
+    ///                       division").
+    function testCalculateRewardPrecisionLoss() public view {
+        // Test case 1: Small amount where division causes truncation to zero
+        uint256 smallAmount = 999; // Less than 1000, so amount / 1000 = 0
+        uint256 periods = 10;
+        uint256 reward = vault.calculateReward(smallAmount, periods);
+        assertEq(reward, 0, "Reward should be 0 due to truncation");
+
+        // Expected behavior: (amount * periods) / 1000 should give a non-zero result
+        uint256 expectedReward = (smallAmount * periods) / 1000; // 999 * 10 / 1000 = 9
+        assertEq(expectedReward, 9, "Expected reward should be 9");
+        assertTrue(reward != expectedReward, "Current implementation loses precision");
+
+        // Test case 2: Medium amount where truncation reduces accuracy
+        uint256 mediumAmount = 1500; // 1500 / 1000 = 1, losing fractional part
+        reward = vault.calculateReward(mediumAmount, periods);
+        assertEq(reward, 10, "Reward should be 10 due to truncation"); // 1 * 10 = 10
+
+        expectedReward = (mediumAmount * periods) / 1000; // 1500 * 10 / 1000 = 15
+        assertEq(expectedReward, 15, "Expected reward should be 15");
+        assertTrue(reward != expectedReward, "Current implementation loses precision");
+
+        // Test case 3: Large amount where truncation has less impact
+        uint256 largeAmount = 1_000_000; // 1000000 / 1000 = 1000
+        reward = vault.calculateReward(largeAmount, periods);
+        assertEq(reward, 10_000, "Reward should be 10000"); // 1000 * 10 = 10000
+
+        expectedReward = (largeAmount * periods) / 1000; // 1000000 * 10 / 1000 = 10000
+        assertEq(expectedReward, 10_000, "Expected reward should be 10000");
+        assertEq(reward, expectedReward, "No precision loss with large amount");
+    }
 }
